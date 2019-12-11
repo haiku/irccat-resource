@@ -1,1 +1,2 @@
-{"version": {"ref": "none"}}
+#!/bin/bash
+echo '{"version": {"ref": "none"}}'
