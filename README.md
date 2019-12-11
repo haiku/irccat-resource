@@ -3,7 +3,13 @@ IRCCat Notification Resource
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/haiku/irccat-resource.svg)](https://hub.docker.com/r/haiku/irccat-resource)
 
-By default, Concourse will `check` your resources once per minute to see if they have updated.
+This Concourse resource reaches out to a remote server [running irccat](https://github.com/irccloud/irccat) to send build
+notifications to IRC channels.
+
+Leveraging a service like irccat from concourse allows:
+
+  * A notification bot to idle in IRC channels (reducing spammy joins/quits)
+  * Color IRC messages
 
 Resource Type Configuration
 ---------------------------
@@ -65,6 +71,9 @@ make push
 
 ### Contributing
 Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn the process for submitting changes to this repo.
+
+## Donations
+If you appreciate this tool, please consider making a donation to [Haiku, Inc.](https://haiku-inc.org)
 
 ## License
 This project is licensed under the MIT license.
