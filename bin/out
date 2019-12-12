@@ -4,26 +4,32 @@ require 'net/http'
 require 'uri'
 require 'pp'
 
-input = JSON.parse(ARGV.first)
+input = JSON.parse(STDIN.read)
 
 if ! input.has_key? "source"
-  puts "Concourse input valiation failed, missing blah"
+  puts "Concourse input valiation failed, missing source"
   exit 132
 end
 source = input['source']
 
-if ! source.has_key? "message"
-  puts "No message provided in resource source!"
+if ! input.has_key? "params"
+  puts "Concourse input validation failed, missing params"
   exit 132
 end
+params = input['params']
+
 if ! source.has_key? "uri"
   puts "No uri provided in resource source!"
+  exit 132
+end
+if ! params.has_key? "message"
+  puts "No message provided in resource source!"
   exit 132
 end
 
 uri = URI.parse(source["uri"])
 request = Net::HTTP::Post.new(uri)
-request.body = source["message"]
+request.body = params["message"]
 req_options = {
   use_ssl: uri.scheme == "https",
 }
