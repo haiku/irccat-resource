@@ -16,17 +16,21 @@ if ! source.has_key? "message"
   puts "No message provided in resource source!"
   exit 132
 end
-if ! source.has_key? "server"
-  puts "No server provided in resource source!"
+if ! source.has_key? "uri"
+  puts "No uri provided in resource source!"
   exit 132
 end
 
-uri = URI.parse(source["server"])
+uri = URI.parse(source["uri"])
 request = Net::HTTP::Post.new(uri)
 request.body = source["message"]
 req_options = {
   use_ssl: uri.scheme == "https",
 }
+
+if source.has_key? "secret"
+  request.add_field 'Authorization', "Bearer #{source["secret"]}"
+end
 
 response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
   http.request(request)

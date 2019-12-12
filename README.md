@@ -30,9 +30,8 @@ resources:
 - name: irccat
   type: irccat-resource
   source:
-    server: irc.freenode.net
-    port: 6667
-    channel: "#cool-git"
+    uri: https://irccat.myserver.com
+    secret: "MyPassword"
 ```
 
 Behavior
@@ -48,7 +47,7 @@ Create or delete a webhook using the configured parameters.
 - put: irccat
   resource: irccat-resource
   params:
-    message: howdy!
+    message: %GREEN howdy! %NORMAL
 ```
 
 ## Development

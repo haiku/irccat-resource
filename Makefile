@@ -3,4 +3,4 @@ default:
 push:
 	docker push docker.io/haiku/irccat-resource:latest
 test:
-	docker run docker.io/haiku/irccat-resource:latest /opt/resource/out '{"source":{"server":"https://google.com","message":"ha"}}'
+	docker run docker.io/haiku/irccat-resource:latest /opt/resource/out '{"source":{"uri":"https://google.com","message":"ha", "secret":"mypassword"}}'
