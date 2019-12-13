@@ -2,7 +2,6 @@
 require 'json'
 require 'net/http'
 require 'uri'
-require 'pp'
 
 input = JSON.parse(STDIN.read)
 
@@ -41,4 +40,5 @@ end
 response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
   http.request(request)
 end
-pp response.body
+
+puts '{"version": {"id":"3"},"metadata":[]}'
