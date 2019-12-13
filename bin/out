@@ -26,9 +26,16 @@ if ! params.has_key? "message"
   exit 132
 end
 
+message = params["message"]
+message.gsub!("${BUILD_TEAM_NAME}", ENV['BUILD_TEAM_NAME'])
+message.gsub!("${BUILD_PIPELINE_NAME}", ENV['BUILD_PIPELINE_NAME'])
+message.gsub!("${BUILD_JOB_NAME}", ENV['BUILD_JOB_NAME'])
+message.gsub!("${BUILD_NAME}", ENV['BUILD_NAME'])
+message.gsub!("${BUILD_URL}", "#{ENV['ATC_EXTERNAL_URL']}/teams/#{ENV['BUILD_TEAM_NAME']}/pipelines/#{ENV['BUILD_PIPELINE_NAME']}/jobs/#{ENV['BUILD_JOB_NAME']}/builds/#{ENV['BUILD_NAME']}")
+
 uri = URI.parse(source["uri"])
 request = Net::HTTP::Post.new(uri)
-request.body = params["message"]
+request.body = message
 req_options = {
   use_ssl: uri.scheme == "https",
 }
